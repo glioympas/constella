@@ -1,0 +1,34 @@
+{
+  "name": "glioympas/constella",
+  "version": "1.0.0",
+  "description": "Locate database columns usage in a matter of seconds",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+  {
+    "name": "George Lioumpas",
+    "email": "g.lioympas@gmail.com"
+  }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lioy\\Constella\\": "src",
+      "Lioy\\Constella\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Lioy\\Constella\\ConstellaServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.4"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^10.0",
+    "phpunit/phpunit": "^12.3",
+    "laravel/pint": "^1.25"
+  }
+}
