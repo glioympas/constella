@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Lioy\Constella\Console\GenerateModelColumns;
+use Lioy\Constella\Console\GenerateModelRelations;
+use Lioy\Constella\Tests\Unit\Console\GenerateModelRelationsTest;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class ConstellaServiceProvider extends ServiceProvider
@@ -21,6 +23,7 @@ class ConstellaServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 GenerateModelColumns::class,
+                GenerateModelRelations::class,
             ]);
 
             $this->publishes([
