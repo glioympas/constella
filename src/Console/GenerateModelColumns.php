@@ -13,7 +13,7 @@ class GenerateModelColumns extends Command
 {
     protected $signature = 'constella:columns';
 
-    protected $description = 'Generates columns for application models';
+    protected $description = 'Generates column constants for application models';
 
     public function handle(GetProjectModelsAction $getProjectModelsAction): int
     {

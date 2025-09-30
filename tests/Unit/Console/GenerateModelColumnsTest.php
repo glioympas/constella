@@ -56,6 +56,8 @@ class GenerateModelColumnsTest extends TestCase
 
     private function projectColumnContents(): string
     {
+        $space = '    ';
+
         return <<<EOT
         <?php
 
@@ -63,9 +65,9 @@ class GenerateModelColumnsTest extends TestCase
 
         class ProjectColumn
         {
-            public const ID = 'id';    
-            public const PROJECT_NAME = 'projectName';    
-            public const CREATED_AT = 'created_at';    
+            public const ID = 'id';$space
+            public const PROJECT_NAME = 'projectName';$space
+            public const CREATED_AT = 'created_at';$space
             public const UPDATED_AT = 'updated_at';
         }
         EOT;
@@ -73,6 +75,8 @@ class GenerateModelColumnsTest extends TestCase
 
     private function taskColumnContents(): string
     {
+        $space = '    ';
+
         return <<<EOT
         <?php
 
@@ -80,10 +84,10 @@ class GenerateModelColumnsTest extends TestCase
 
         class TaskColumn
         {
-            public const ID = 'id';    
-            public const NAME = 'name';    
-            public const PROJECT_ID = 'project_id';    
-            public const CREATED_AT = 'created_at';    
+            public const ID = 'id';$space
+            public const NAME = 'name';$space
+            public const PROJECT_ID = 'project_id';$space
+            public const CREATED_AT = 'created_at';$space
             public const UPDATED_AT = 'updated_at';
         }
         EOT;

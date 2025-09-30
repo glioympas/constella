@@ -5,22 +5,24 @@
 ## What it does?
 Constella will automatically publish your DB columns as public PHP constants after every successful regular Laravel php artisan migrate execution.
 
+In addition to that, you may also want to follow same logic on Model relations too and have them as constants. You can simply generate them with an artisan command.
+
 **Note**: This is mostly to be used for your new projects, since it can get quite cumbersome to refactor your current ones to follow that logic.
 
 ## What this is about?
 Wouldn't it be great for your developers, no matter if they are new to the project, or have been there for some time already,
-to be able to find where a specific DB column is used on the codebase, super fast?
+to be able to find where a specific DB column or relation is being used on the codebase, super fast?
 
 Think of it, that's extremelly powerful since almost everything is around data. 
 
 That means:
 
-- Faster bug fixes
-- New developers can be more productive faster
-- Faster / easier refactorings
+- Faster & painless bug fixes
+- Faster & painless code refactorings
+- New comers can ship faster
+- Consistency & enhanced searchability
 
 And in general, more confidence on finding where things are being used in a large (or not) codebase.
-
 
 ### Example that describes the problem
 
@@ -40,12 +42,12 @@ where('title')
 whereTitle
 ```
 
-After finding some on different files, he/she just wishes that to be all. That simple task was almost already pain in the ass. The larger the codebase, the worse it gets.
+After finding some on different files, person just wishes that to be all. That simple task was almost already pain in the ass. The larger the codebase, the worse it gets.
 The developer experience can get better IMO.
 
 ### A solution to the above problem
 
-You have as a policy / coding standard on your codebase and you don't allow developers to use magic strings for DB columns. Developers should only use regular PHP constants.
+You have a policy / coding standard on your codebase and you don't allow developers to use magic strings for DB columns or even relations. Developers should only use regular PHP constants.
 
 The above developer now just searches for
 
@@ -122,9 +124,30 @@ For **first time** usage, if you don't have an migration to execute, you can pub
 php artisan constella:columns
 ```
 
-## Ideas:
+### Also need Model relations constants?
 
-- Publish model relations as constants too 
+Want to also have model relations as constants too? You can generate them with the following command on first time usage or after each time you add a new relation
+
+to your models:
+```
+php artisan constella:relations
+```
+
+**Note**: To allow Constella locate the relations, your relation functions on Eloquent models should be type-hinted!
+
+Then you can force a policy for your developers to use relations like that:
+
+```
+Task::query()->whereRelation(TaskRelation::PROJECT, ProjectColumn::TITLE, '=', '....)
+```
+
+```
+$task->{TaskRelation::PROJECT}->title
+```
+
+```
+Task::query()->whereHas(TaskRelation::PROJECT, fn() => ... )
+```
 
 ## License
 
