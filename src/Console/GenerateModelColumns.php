@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Lioy\Constella\Actions\GetProjectModelsAction;
+use Lioy\Constella\Helper;
 
 class GenerateModelColumns extends Command
 {
@@ -24,7 +25,7 @@ class GenerateModelColumns extends Command
             $model = new $model;
 
             $columnConstants = collect(Schema::getColumns($model->getTable()))
-                ->map(fn (array $column) => 'public const '.strtoupper($this->camelCaseToSnakeCase($column['name'])).' = '."'{$column['name']}';"
+                ->map(fn (array $column) => 'public const string '.strtoupper(Helper::camelCaseToSnakeCase($column['name'])).' = '."'{$column['name']}';"
                 )
                 ->toArray();
 
@@ -63,11 +64,6 @@ class GenerateModelColumns extends Command
             ],
             subject: $template
         );
-    }
-
-    private function camelCaseToSnakeCase(string $string): string
-    {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
     }
 
     private function columnClassTemplate(): string

@@ -3,9 +3,7 @@
 namespace Lioy\Constella\Tests\Unit\Console;
 
 use Illuminate\Support\Facades\Config;
-use Lioy\Constella\Actions\GetProjectModelsAction;
 use Lioy\Constella\Tests\TestCase;
-use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\Test;
 
 class GenerateModelRelationsTest extends TestCase
@@ -47,8 +45,8 @@ class GenerateModelRelationsTest extends TestCase
 
         class TaskRelation
         {
-            public const PROJECT = 'project';$space
-            public const PARENT_TASK = 'parentTask';
+            public const string PROJECT = 'project';$space
+            public const string PARENT_TASK = 'parentTask';
         }
         EOT;
     }

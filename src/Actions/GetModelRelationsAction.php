@@ -15,7 +15,7 @@ class GetModelRelationsAction
     {
         return collect(new ReflectionClass($model)->getMethods())
             ->filter(
-                fn(ReflectionMethod $method) => !empty($method->getReturnType()) &&
+                fn (ReflectionMethod $method) => ! empty($method->getReturnType()) &&
                     str_contains(
                         $method->getReturnType(),
                         'Illuminate\Database\Eloquent\Relations'
