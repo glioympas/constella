@@ -14,5 +14,5 @@ return [
      * Relations constants configuration
      */
     'relation_classes_folder_name' => 'Relations',
-    'relation_class_suffix' => 'Relation'
+    'relation_class_suffix' => 'Relation',
 ];

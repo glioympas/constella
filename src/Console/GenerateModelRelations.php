@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Lioy\Constella\Actions\GetModelRelationsAction;
 use Lioy\Constella\Actions\GetProjectModelsAction;
+use Lioy\Constella\Helper;
 
 class GenerateModelRelations extends Command
 {
@@ -17,22 +18,21 @@ class GenerateModelRelations extends Command
     public function handle(
         GetProjectModelsAction $getProjectModelsAction,
         GetModelRelationsAction $getModelRelationsAction
-    ): int
-    {
+    ): int {
         $projectModels = $getProjectModelsAction->execute();
 
-        $projectModels->each(function(string $model) use ($getModelRelationsAction) {
+        $projectModels->each(function (string $model) use ($getModelRelationsAction) {
             /** @var Model $model */
             $model = new $model;
 
             $relations = $getModelRelationsAction->execute($model);
 
-            if(empty($relations)) {
+            if (empty($relations)) {
                 return;
             }
 
             $relationConstants = collect($relations)
-                ->map(fn (string $relation) => 'public const '.strtoupper($this->camelCaseToSnakeCase($relation)).' = '."'{$relation}';"
+                ->map(fn (string $relation) => 'public const string '.strtoupper(Helper::camelCaseToSnakeCase($relation)).' = '."'{$relation}';"
                 )
                 ->toArray();
 
@@ -44,8 +44,6 @@ class GenerateModelRelations extends Command
             if (! File::exists($relationsFolder)) {
                 File::makeDirectory($relationsFolder);
             }
-
-
 
             File::put($relationsFolder."/$className.php", $this->generateFinalFileContents(
                 className: $className,
@@ -71,11 +69,6 @@ class GenerateModelRelations extends Command
             ],
             subject: $template
         );
-    }
-
-    private function camelCaseToSnakeCase(string $string): string
-    {
-        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $string));
     }
 
     private function relationClassTemplate(): string

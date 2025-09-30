@@ -65,10 +65,10 @@ class GenerateModelColumnsTest extends TestCase
 
         class ProjectColumn
         {
-            public const ID = 'id';$space
-            public const PROJECT_NAME = 'projectName';$space
-            public const CREATED_AT = 'created_at';$space
-            public const UPDATED_AT = 'updated_at';
+            public const string ID = 'id';$space
+            public const string PROJECT_NAME = 'projectName';$space
+            public const string CREATED_AT = 'created_at';$space
+            public const string UPDATED_AT = 'updated_at';
         }
         EOT;
     }
@@ -84,11 +84,11 @@ class GenerateModelColumnsTest extends TestCase
 
         class TaskColumn
         {
-            public const ID = 'id';$space
-            public const NAME = 'name';$space
-            public const PROJECT_ID = 'project_id';$space
-            public const CREATED_AT = 'created_at';$space
-            public const UPDATED_AT = 'updated_at';
+            public const string ID = 'id';$space
+            public const string NAME = 'name';$space
+            public const string PROJECT_ID = 'project_id';$space
+            public const string CREATED_AT = 'created_at';$space
+            public const string UPDATED_AT = 'updated_at';
         }
         EOT;
     }
